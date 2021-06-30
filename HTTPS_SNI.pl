@@ -2,6 +2,8 @@
 
 use strict;
 use warnings;
+use MIME::Base64;
+
 
 ########################################################################################################
 # jetNEXUS custom health checking Copyright jetNEXUS 2016
@@ -32,6 +34,9 @@ sub monitor
     my $password   = $_[6];     ### password (optional)
     my $resolve;
     my $auth       = '';
+
+#Password is Base64 encoded as such please passwordd
+$passwordd =$decode_base64($password);
 
     if ($port) 
     {

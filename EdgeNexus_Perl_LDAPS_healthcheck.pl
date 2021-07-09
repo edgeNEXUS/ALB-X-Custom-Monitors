@@ -40,7 +40,7 @@ $passwordd =$decode_base64($password);
 		 
 	 $result = $ldap->bind(
 			 "cn=aerohive_svc,ou=service accounts,dc=diti,dc=lr,dc=net",
-			 password => $password);
+			 password => $passwordd);
 	 return(2) if $result->code(  );
       
 	## Unbind and exit.

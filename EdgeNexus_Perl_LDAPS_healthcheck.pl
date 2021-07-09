@@ -2,6 +2,7 @@
 use strict;
 use warnings;
 use Net::LDAP; 
+use MIME::Base64;
 
 #####################################################################
 # EdgeNexus custom LDAPS Healthcheck - written by acra
@@ -18,6 +19,9 @@ sub monitor
 	 my $password = $_[6];   ### Password field from GUI Library > Real Server Monitors
 	 my $resolve;
 	 my $auth = '';
+	 
+	 #Password is Base64 encoded as such please passwordd
+$passwordd =$decode_base64($password);
 	 
 	 if ($port)
 	 {

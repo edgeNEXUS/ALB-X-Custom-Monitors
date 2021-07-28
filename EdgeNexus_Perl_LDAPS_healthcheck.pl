@@ -7,7 +7,7 @@ use MIME::Base64;
 #####################################################################
 # EdgeNexus custom LDAPS Healthcheck - written by acra
 #####################################################################
-# This is a Perl script for use with Edge Nexus load balancers to check LDAPS status
+# This is a Perl script for use with Edgenexus load balancers to check LDAPS status
 # When return = 1, healthcheck pass. When return = 2, healthcheck fail.
 # See https://appstore.edgenexus.io/user-guides/user-guide-4-2-x/software-version-4-2-x-user-guide/real-server-monitoring/#Custom_Monitors for more details
 sub monitor
@@ -21,7 +21,7 @@ sub monitor
 	 my $auth = '';
 	 
 	 #Password is Base64 encoded as such please passwordd
-$passwordd =$decode_base64($password);
+         $passwordd = $decode_base64($password);
 	 
 	 if ($port)
 	 {
@@ -30,24 +30,21 @@ $passwordd =$decode_base64($password);
 	 else {
 		 $resolve = "$notes:$host";
 	 }
-	## Connect and bind to the server.
-	 $ldap = Net::LDAP->new ($host, port =>$port,
-							 version => 3 )
+
+ 	 ## Connect and bind to the server.
+	 $ldap = Net::LDAP->new($host, port => $port, version => 3 )
 	 or return(2);
 		 
 	 $result = $ldap->start_tls(  );
 	 return(2) if $result->code(  );
 		 
-	 $result = $ldap->bind(
-			 "cn=aerohive_svc,ou=service accounts,dc=diti,dc=lr,dc=net",
-			 password => $passwordd);
+	 $result = $ldap->bind($user, password => $passwordd);
 	 return(2) if $result->code(  );
       
-	## Unbind and exit.
+   	 ## Unbind and exit.
 	 $ldap->unbind(  );
-	 print "Bind Successful. Quitting.";
+	 print "LDAP bind Successful.\n";
 	 return(1);
 	 
 }
 monitor(@ARGV);
-	 

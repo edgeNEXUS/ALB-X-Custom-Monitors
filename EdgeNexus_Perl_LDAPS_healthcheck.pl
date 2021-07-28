@@ -1,4 +1,4 @@
-#Monitor-Name:LDAPS_Healthcheck
+#Monitor-Name:LDAPS
 use strict;
 use warnings;
 use Net::LDAP; 
@@ -21,21 +21,13 @@ sub monitor
 	 my $auth = '';
 	 
 	 #Password is Base64 encoded as such please passwordd
-         $passwordd = $decode_base64($password);
+         my $passwordd = $decode_base64($password);
 	 
-	 if ($port)
-	 {
-		 $resolve = "$notes:$port:$host";
-	 }
-	 else {
-		 $resolve = "$notes:$host";
-	 }
-
  	 ## Connect and bind to the server.
-	 $ldap = Net::LDAP->new($host, port => $port, version => 3 )
+	 my $ldap = Net::LDAP->new($host, port => $port, version => 3 )
 	 or return(2);
 		 
-	 $result = $ldap->start_tls(  );
+	 my $result = $ldap->start_tls(  );
 	 return(2) if $result->code(  );
 		 
 	 $result = $ldap->bind($user, password => $passwordd);

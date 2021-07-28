@@ -21,7 +21,7 @@ sub monitor
 	 my $auth = '';
 	 
 	 #Password is Base64 encoded as such please passwordd
-         my $passwordd = $decode_base64($password);
+         my $passwordd = decode_base64($password);
 	 
  	 ## Connect and bind to the server.
 	 my $ldap = Net::LDAP->new($host, port => $port, version => 3 )

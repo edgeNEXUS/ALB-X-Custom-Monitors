@@ -27,11 +27,11 @@ sub monitor
 
  	# Connect to the server
 	my $ldap = Net::LDAP->new("ldaps://$host", port => $port, version => 3)
-	    or return(23);
+	    or return(2);
 
 	# Bind to the server
 	my $result = $ldap->bind($user, password => $passwordd);
-	return(2) if $result->code();
+	return(3) if $result->code();
       
    	# Unbind and exit
 	$ldap->unbind();

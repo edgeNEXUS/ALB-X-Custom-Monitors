@@ -17,8 +17,6 @@ sub monitor
 	 my $notes = $_[3];  ### Taken from notes field on Real Server
 	 my $user = $_[5];   ### User field from GUI Library > Real Server Monitors
 	 my $password = $_[6];   ### Password field from GUI Library > Real Server Monitors
-	 my $resolve;
-	 my $auth = '';
 	 
 	 #Password is Base64 encoded as such please passwordd
          my $passwordd = decode_base64($password);

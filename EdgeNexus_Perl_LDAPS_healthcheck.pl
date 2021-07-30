@@ -22,15 +22,18 @@ sub monitor
 	    $port = 636;
 	}
 
-	# Password is Base64 encoded as such please passwordd
-        my $passwordd = decode_base64($password);
+	# Uncomment if ADC passes password Base64 encoded
+        # $password = decode_base64($password);
+
+	# Debug
+	# print("host=$host\nport=$port\nuser=$user\npassword=$password\n");
 
  	# Connect to the server
 	my $ldap = Net::LDAP->new("ldaps://$host", port => $port, version => 3)
 	    or return(2);
 
 	# Bind to the server
-	my $result = $ldap->bind($user, password => $passwordd);
+	my $result = $ldap->bind($user, password => $password);
 	return(3) if $result->code();
       
    	# Unbind and exit
